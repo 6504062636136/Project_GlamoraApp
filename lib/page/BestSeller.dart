@@ -1,65 +1,163 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:untitled5/page/BeautyTips.dart';
-import 'package:untitled5/page/BestSeller.dart';
-import 'package:untitled5/page/Categoties.dart';
-import 'package:untitled5/page/MyProfile.dart';
-import 'package:untitled5/page/Promotions.dart';
-import 'package:untitled5/page/Status.dart';
-import 'package:untitled5/page/SignupPage.dart';
-import 'package:untitled5/page/AboutUsPage.dart';
-import 'package:untitled5/page/Register.dart';
-import 'package:untitled5/page/HomePage.dart';
-import 'package:untitled5/categoties/makeup/Rarbaeuty.dart'; // Import the ProductDetailPage
-import 'package:untitled5/page/CartProvider.dart';
-import 'package:untitled5/page/FavoritesProviderPage.dart';
 
-import 'Favoritepage.dart';
-
-void main() {
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => CartProvider()),
-        ChangeNotifierProvider(create: (_) => FavoritesProvider()),
-      ],
-      child: MyApp(),
-    ),
-  );
-}
-
-class MyApp extends StatelessWidget {
+class BestSellersPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Glamora App',
-      theme: ThemeData(
-        primarySwatch: Colors.pink,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Best Sellers'),
+        backgroundColor: Colors.pink, // Match the primarySwatch color
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+              // Implement search functionality
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.shopping_cart),
+            onPressed: () {
+              // Implement cart functionality
+            },
+          ),
+        ],
       ),
-      home: HomePage1(),
-      routes: {
-        '/status': (context) => StatusPage(),
-        '/categories': (context) => CategoryPage(),
-        '/HomePage': (context) => HomePage1(),
-        '/productDetail': (context) => ProductDetailPage(), // Add the route
-        '/favorites': (context) =>
-            FavoritesPage(), // Add the route for favorites page
-      },
+      backgroundColor: Color(0xFF69376D), // พื้นหลังสีม่วง
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(color: Color(0xFFFDD8E7)),
+              child: Text(
+                'Menu',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+            ),
+            _drawerItem(context, Icons.home, 'Home', '/home'),
+            _drawerItem(context, Icons.update, 'Status', '/status'),
+            _drawerItem(context, Icons.category, 'Categories', '/categories'),
+            _drawerItem(
+                context, Icons.local_offer, 'Promotions', '/promotions'),
+            _drawerItem(context, Icons.star, 'Best Sellers', '/bestSellers'),
+            _drawerItem(context, Icons.favorite, 'Beauty Tips', '/beautyTips'),
+            _drawerItem(context, Icons.info, 'About Us', '/about'),
+          ],
+        ),
+      ),
+      body: Column(
+        children: [
+          // Title
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10.0),
+            child: Text(
+              'Best Sellers',
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          Expanded(
+            child: ListView(
+              padding: EdgeInsets.all(20),
+              children: [
+                _buildBestSellerItem(
+                  image: 'assets/images/dior.png',
+                  brand: 'Dior',
+                  description:
+                      'Dior Forever Skin Glow 24h Hydrating\nRadiant Foundation - 30ml',
+                  rating: 4.8,
+                  reviews: 365,
+                  price: '2,900.00',
+                ),
+                _buildBestSellerItem(
+                  image: 'assets/images/rare_beauty.png',
+                  brand: 'Rare Beauty',
+                  description: 'Soft Pinch Liquid Blush - 7.5ml',
+                  rating: 4.8,
+                  reviews: 17433,
+                  price: '1,100.00',
+                ),
+                _buildBestSellerItem(
+                  image: 'assets/images/hourglass.png',
+                  brand: 'Hourglass',
+                  description: 'Vanish™ Airbrush Concealer',
+                  rating: 4.8,
+                  reviews: 1182,
+                  price: '1,700.00',
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
-}
 
-class Bestseller extends StatefulWidget {
-  const Bestseller({super.key, required String name, required String image});
+  Widget _buildBestSellerItem({
+    required String image,
+    required String brand,
+    required String description,
+    required double rating,
+    required int reviews,
+    required String price,
+  }) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 15),
+      padding: EdgeInsets.all(15),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Image.asset(image, width: 60, height: 80),
+          SizedBox(width: 15),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  brand,
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                ),
+                Text(
+                  description,
+                  style: TextStyle(fontSize: 14),
+                ),
+                SizedBox(height: 5),
+                Row(
+                  children: [
+                    Text('$rating', style: TextStyle(fontSize: 14)),
+                    Icon(Icons.star, color: Colors.yellow, size: 16),
+                    Text(' $reviews Reviews', style: TextStyle(fontSize: 12)),
+                  ],
+                ),
+                SizedBox(height: 5),
+                Text(
+                  '$price Bath',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+          Icon(Icons.favorite_border),
+        ],
+      ),
+    );
+  }
 
-  @override
-  State<Bestseller> createState() => _BestsellerState();
-}
-
-class _BestsellerState extends State<Bestseller> {
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
+  ListTile _drawerItem(
+      BuildContext context, IconData icon, String title, String route) {
+    return ListTile(
+      leading: Icon(icon, color: Colors.deepPurple),
+      title: Text(title),
+      onTap: () {
+        Navigator.pushNamed(context, route);
+      },
+    );
   }
 }

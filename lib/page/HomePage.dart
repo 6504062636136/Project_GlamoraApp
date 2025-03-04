@@ -16,10 +16,11 @@ void main() {
     debugShowCheckedModeBanner: false,
     home: HomePage1(),
     routes: {
+      '/home': (context) => HomePage1(),
       '/status': (context) => StatusPage(),
       '/categories': (context) => CategoryPage(),
       '/promotions': (context) => PromotionsPage(),
-      '/bestsellers': (context) => Bestseller(name: 'name', image: 'image',),
+      '/bestsellers': (context) => BestSellersPage(),
       '/beautytips': (context) => BeautyTipsPage(),
       '/about': (context) => AboutUsPage(),
       '/profile': (context) => MyProfilePage(),
@@ -69,7 +70,8 @@ class _HomePage1State extends State<HomePage1> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => SearchResultsPage(query: query, items: _allItems),
+        builder: (context) =>
+            SearchResultsPage(query: query, items: _filteredItems),
       ),
     );
   }
@@ -110,6 +112,7 @@ class _HomePage1State extends State<HomePage1> {
                 fit: BoxFit.contain,
               ),
             ),
+            _drawerItem(Icons.home, 'Home', '/home'),
             _drawerItem(Icons.system_update, 'Status', '/status'),
             _drawerItem(Icons.category, 'Categories', '/categories'),
             _drawerItem(Icons.local_offer, 'Promotions', '/promotions'),
@@ -240,9 +243,17 @@ class _HomePage1State extends State<HomePage1> {
                       ),
                     );
                   },
-                  child: Bestseller(
-                    name: _allItems[index]["name"]!,
-                    image: _allItems[index]["image"]!,
+                  child: Column(
+                    children: [
+                      Image.asset(
+                        _allItems[index]["image"]!,
+                        width: 100,
+                        height: 100,
+                        fit: BoxFit.cover,
+                      ),
+                      SizedBox(height: 5),
+                      Text(_allItems[index]["name"]!),
+                    ],
                   ),
                 ),
               );

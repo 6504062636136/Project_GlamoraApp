@@ -56,7 +56,9 @@ class MyProfilePage extends StatelessWidget {
                           // กดที่รูปแล้วไปหน้า EditPicPage
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => EditPic()), // **Go to EditPicPage**
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    EditPic()), // **Go to EditPicPage**
                           );
                         },
                         child: Container(
@@ -101,7 +103,8 @@ class MyProfilePage extends StatelessWidget {
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.deepPurple[400],
-                          padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 40, vertical: 15),
                           textStyle: TextStyle(fontSize: 18),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30),
@@ -110,10 +113,13 @@ class MyProfilePage extends StatelessWidget {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => EditProfilePage()), // **Go to EditProfilePage**
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    EditProfilePage()), // **Go to EditProfilePage**
                           );
                         },
-                        child: Text('Edit Profile', style: TextStyle(color: Colors.white)),
+                        child: Text('Edit Profile',
+                            style: TextStyle(color: Colors.white)),
                       ),
                       SizedBox(height: 30),
                       Container(
@@ -124,11 +130,20 @@ class MyProfilePage extends StatelessWidget {
                         padding: EdgeInsets.all(20),
                         child: Column(
                           children: <Widget>[
-                            ProfileMenuItem(icon: Icons.history, title: 'History'),
+                            ProfileMenuItem(
+                                icon: Icons.history,
+                                title: 'History',
+                                routeName: '/history'),
                             Divider(),
-                            ProfileMenuItem(icon: Icons.shopping_cart, title: 'My Cart'),
+                            ProfileMenuItem(
+                                icon: Icons.shopping_cart,
+                                title: 'My Cart',
+                                routeName: '/mycart'),
                             Divider(),
-                            ProfileMenuItem(icon: Icons.favorite, title: 'My List'),
+                            ProfileMenuItem(
+                                icon: Icons.favorite,
+                                title: 'My Favorite',
+                                routeName: '/mylist'),
                           ],
                         ),
                       ),
@@ -160,35 +175,42 @@ class MyProfilePage extends StatelessWidget {
 class ProfileMenuItem extends StatelessWidget {
   final IconData icon;
   final String title;
+  final String routeName;
 
   const ProfileMenuItem({
     Key? key,
     required this.icon,
     required this.title,
+    required this.routeName,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Row(
-            children: [
-              Icon(icon, color: Colors.black),
-              SizedBox(width: 20),
-              Text(
-                title,
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+      child: InkWell(
+        onTap: () {
+          Navigator.pushNamed(context, routeName);
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Row(
+              children: [
+                Icon(icon, color: Colors.black),
+                SizedBox(width: 20),
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-            ],
-          ),
-          Icon(Icons.arrow_forward_ios, color: Colors.black),
-        ],
+              ],
+            ),
+            Icon(Icons.arrow_forward_ios, color: Colors.black),
+          ],
+        ),
       ),
     );
   }
