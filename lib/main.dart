@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
         '/productlist': (context) => ProductListPage(),
         '/history': (context) => HistoryPage(), // Add this line
         '/mycart': (context) => MyCartPage(), // Add this line
-        '/mylist': (context) => MyListPage(), // Add this line
+        '/mylist': (context) => MyFavPage(), // Add this line
       },
     );
   }
