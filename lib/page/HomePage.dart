@@ -154,6 +154,13 @@ class HomePage1 extends StatelessWidget {
                         ),
                       ],
                     ),
+                    SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/productlist');
+                      },
+                      child: Text('View Products'),
+                    ),
                   ],
                 ),
               ),

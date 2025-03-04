@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:untitled5/ProductListPage.dart';
 import 'package:untitled5/page/BeautyTips.dart';
 import 'package:untitled5/page/BestSeller.dart';
 import 'package:untitled5/page/Categoties.dart';
@@ -9,6 +10,10 @@ import 'package:untitled5/page/SignupPage.dart';
 import 'package:untitled5/page/AboutUsPage.dart';
 import 'package:untitled5/page/Register.dart';
 import 'package:untitled5/page/HomePage.dart';
+import 'package:untitled5/ProductListPage.dart';
+import 'package:untitled5/page/HistoryPage.dart';
+import 'package:untitled5/page/MyCartPage.dart';
+import 'package:untitled5/page/MyFavPage.dart';
 
 void main() {
   runApp(MyApp());
@@ -35,6 +40,10 @@ class MyApp extends StatelessWidget {
         '/signup': (context) => SignUpPage(),
         '/register': (context) => RegisterPage(),
         '/HomePage': (context) => HomePage1(),
+        '/productlist': (context) => ProductListPage(),
+        '/history': (context) => HistoryPage(), // Add this line
+        '/mycart': (context) => MyCartPage(), // Add this line
+        '/mylist': (context) => MyListPage(), // Add this line
       },
     );
   }
