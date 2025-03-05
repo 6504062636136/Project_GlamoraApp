@@ -16,10 +16,11 @@ void main() {
     debugShowCheckedModeBanner: false,
     home: HomePage1(),
     routes: {
+      '/home': (context) => HomePage1(),
       '/status': (context) => StatusPage(),
       '/categories': (context) => CategoryPage(),
       '/promotions': (context) => PromotionsPage(),
-      '/bestsellers': (context) => Bestseller(name: 'name', image: 'image',),
+      '/bestsellers': (context) => BestSellersPage(),
       '/beautytips': (context) => BeautyTipsPage(),
       '/about': (context) => AboutUsPage(),
       '/profile': (context) => MyProfilePage(),
@@ -70,7 +71,8 @@ class _HomePage1State extends State<HomePage1> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => SearchResultsPage(query: query, items: _allItems),
+        builder: (context) =>
+            SearchResultsPage(query: query, items: _filteredItems),
       ),
     );
   }
@@ -117,6 +119,7 @@ class _HomePage1State extends State<HomePage1> {
                 fit: BoxFit.contain,
               ),
             ),
+            _drawerItem(Icons.home, 'Home', '/home'),
             _drawerItem(Icons.system_update, 'Status', '/status'),
             _drawerItem(Icons.category, 'Categories', '/categories'),
             _drawerItem(Icons.local_offer, 'Promotions', '/promotions'),
@@ -219,10 +222,54 @@ class _HomePage1State extends State<HomePage1> {
               return Container(
                 margin: EdgeInsets.only(right: 10),
                 child: GestureDetector(
+<<<<<<< HEAD
                   onTap: () => _onProductTap(_allItems[index]),
                   child: Bestseller(
                     name: _allItems[index]["name"]!,
                     image: _allItems[index]["image"]!,
+=======
+                  onTap: () {
+                    // Navigate to the product detail page
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          // Determine which detail page to show based on the index
+                          switch (index) {
+                            case 0:
+                              return GorginaLipstickDetailPage(
+                                productName: _allItems[index]["name"]!,
+                                productImage: _allItems[index]["image"]!,
+                              );
+                            case 1:
+                              return ShiseidoLipstickDetailPage(
+                                productName: _allItems[index]["name"]!,
+                                productImage: _allItems[index]["image"]!,
+                              );
+                            case 2:
+                              return RareBeautyDetailPage(
+                                productName: _allItems[index]["name"]!,
+                                productImage: _allItems[index]["image"]!,
+                              );
+                            default:
+                              return Container(); // Or an error page
+                          }
+                        },
+                      ),
+                    );
+                  },
+                  child: Column(
+                    children: [
+                      Image.asset(
+                        _allItems[index]["image"]!,
+                        width: 100,
+                        height: 100,
+                        fit: BoxFit.cover,
+                      ),
+                      SizedBox(height: 5),
+                      Text(_allItems[index]["name"]!),
+                    ],
+>>>>>>> 866cfaa74e2746010371d44c36990daa0e2843f3
                   ),
                 ),
               );
