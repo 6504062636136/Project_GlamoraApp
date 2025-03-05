@@ -40,6 +40,7 @@ class _HomePage1State extends State<HomePage1> {
     {"name": "Rare Beauty", "image": "assets/images/rare_beauty.jpg"},
   ];
   List<Map<String, String>> _filteredItems = [];
+  Map<String, String>? _selectedItem;
 
   @override
   void initState() {
@@ -72,6 +73,12 @@ class _HomePage1State extends State<HomePage1> {
         builder: (context) => SearchResultsPage(query: query, items: _allItems),
       ),
     );
+  }
+
+  void _onProductTap(Map<String, String> item) {
+    setState(() {
+      _selectedItem = item;
+    });
   }
 
   @override
@@ -128,7 +135,9 @@ class _HomePage1State extends State<HomePage1> {
               SizedBox(height: 20),
               _buildSearchBar(),
               SizedBox(height: 20),
-              _buildBestSellersSection(),
+              _selectedItem == null
+                  ? _buildBestSellersSection()
+                  : _buildProductDetails(_selectedItem!),
             ],
           ),
         ),
@@ -210,36 +219,7 @@ class _HomePage1State extends State<HomePage1> {
               return Container(
                 margin: EdgeInsets.only(right: 10),
                 child: GestureDetector(
-                  onTap: () {
-                    // Navigate to the product detail page
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          // Determine which detail page to show based on the index
-                          switch (index) {
-                            case 0:
-                              return GorginaLipstickDetailPage(
-                                productName: _allItems[index]["name"]!,
-                                productImage: _allItems[index]["image"]!,
-                              );
-                            case 1:
-                              return ShiseidoLipstickDetailPage(
-                                productName: _allItems[index]["name"]!,
-                                productImage: _allItems[index]["image"]!,
-                              );
-                            case 2:
-                              return RareBeautyDetailPage(
-                                productName: _allItems[index]["name"]!,
-                                productImage: _allItems[index]["image"]!,
-                              );
-                            default:
-                              return Container(); // Or an error page
-                          }
-                        },
-                      ),
-                    );
-                  },
+                  onTap: () => _onProductTap(_allItems[index]),
                   child: Bestseller(
                     name: _allItems[index]["name"]!,
                     image: _allItems[index]["image"]!,
@@ -248,6 +228,39 @@ class _HomePage1State extends State<HomePage1> {
               );
             },
           ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildProductDetails(Map<String, String> item) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          item["name"]!,
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
+        SizedBox(height: 10),
+        Image.asset(
+          item["image"]!,
+          width: double.infinity,
+          height: 250,
+          fit: BoxFit.cover,
+        ),
+        SizedBox(height: 20),
+        Text(
+          'Product details go here...',
+          style: TextStyle(fontSize: 16),
+        ),
+        SizedBox(height: 20),
+        ElevatedButton(
+          onPressed: () {
+            setState(() {
+              _selectedItem = null;
+            });
+          },
+          child: Text('Back to Best Sellers'),
         ),
       ],
     );

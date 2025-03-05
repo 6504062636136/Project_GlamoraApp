@@ -10,7 +10,7 @@ class PromotionsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF77407F), // สีพื้นหลังม่วง
+      backgroundColor: Color(0xFF77407F), 
       appBar: AppBar(
         backgroundColor: Color(0xFF77407F),
         elevation: 0,

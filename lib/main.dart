@@ -9,7 +9,9 @@ import 'package:untitled5/page/SignupPage.dart';
 import 'package:untitled5/page/AboutUsPage.dart';
 import 'package:untitled5/page/Register.dart';
 import 'package:untitled5/page/HomePage.dart';
-import 'package:untitled5/categoties/makeup/Rarbaeuty.dart'; // Import the ProductDetailPage
+import 'package:untitled5/categoties/makeup/Rarbaeuty.dart';
+import 'package:untitled5/page/LoginPage.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -24,8 +26,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.pink,
       ),
-      home: HomePage1(),
+      home: LoginPage(),
       routes: {
+        '/login': (context) => LoginPage(),
         '/status': (context) => StatusPage(),
         '/categories': (context) => CategoryPage(),
         '/promotions': (context) => PromotionsPage(),
