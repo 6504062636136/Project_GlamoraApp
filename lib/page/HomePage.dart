@@ -222,12 +222,11 @@ class _HomePage1State extends State<HomePage1> {
               return Container(
                 margin: EdgeInsets.only(right: 10),
                 child: GestureDetector(
-<<<<<<< HEAD
+
                   onTap: () => _onProductTap(_allItems[index]),
                   child: Bestseller(
                     name: _allItems[index]["name"]!,
                     image: _allItems[index]["image"]!,
-=======
                   onTap: () {
                     // Navigate to the product detail page
                     Navigator.push(
@@ -269,7 +268,7 @@ class _HomePage1State extends State<HomePage1> {
                       SizedBox(height: 5),
                       Text(_allItems[index]["name"]!),
                     ],
->>>>>>> 866cfaa74e2746010371d44c36990daa0e2843f3
+
                   ),
                 ),
               );

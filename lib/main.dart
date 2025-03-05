@@ -9,16 +9,12 @@ import 'package:untitled5/page/SignupPage.dart';
 import 'package:untitled5/page/AboutUsPage.dart';
 import 'package:untitled5/page/Register.dart';
 import 'package:untitled5/page/HomePage.dart';
-<<<<<<< HEAD
 import 'package:untitled5/categoties/makeup/Rarbaeuty.dart';
 import 'package:untitled5/page/LoginPage.dart';
-
-=======
 import 'package:untitled5/categoties/makeup/Rarbaeuty.dart'; // Import the ProductDetailPage
 import 'package:provider/provider.dart';
 import 'models/CartModel.dart';
 import 'page/CartPage.dart';
->>>>>>> 866cfaa74e2746010371d44c36990daa0e2843f3
 
 void main() {
   runApp(
@@ -38,11 +34,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.pink,
       ),
-<<<<<<< HEAD
       home: LoginPage(),
-=======
       home: SplashScreen(),
->>>>>>> 866cfaa74e2746010371d44c36990daa0e2843f3
+
       routes: {
         '/login': (context) => LoginPage(),
         '/status': (context) => StatusPage(),
